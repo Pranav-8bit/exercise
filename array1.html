@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array1</title>
+  </head>
+  <body>
+    <script>
+      const inventors = [
+        { first: "Mohandas", last: "Gandhi", year: 1869, passed: 1948 },
+        { first: "Subhas", last: "Bose", year: 1897, passed: 1945 },
+        { first: "Bhagat", last: "Singh", year: 1907, passed: 1931 },
+        { first: "Raibindranath", last: "Tagore", year: 1861, passed: 1941 },
+        { first: "Chandra", last: "Azad", year: 1906, passed: 1931 },
+        { first: "Lala", last: "Rai", year: 1865, passed: 1928 },
+        { first: "Udham", last: "Singh", year: 1899, passed: 1940 },
+      ];
+
+      const character = [
+        "Albus, Dumbledore",
+        "Harry, Potter",
+        "Hermione, Granger",
+        "Bellatrix, Lestrange",
+        "Sirius, Black",
+        "Draco, Malfoy",
+        "Rubeus, Hagrid",
+        "Ron, Weasley",
+        "Lord, Voldemort",
+        "Neville, Longbottom",
+        "Luna, Lovegood",
+        "Rubeus, Hagrid",
+        "Newt, Scamander",
+        "Minerva, McGonagall",
+        "Severus, Snape",
+        "Gellert, Grindelwald",
+        "Ginny, Weasley",
+        "Gilderoy, Lockhart",
+        "Alastor, Moody",
+        "Minerva, McGonagall",
+        "Lucius, Malfoy",
+        "Remus, Lupin",
+        "Cedric, Diggory",
+        "Dolores Umbridge",
+        "Argus, Filch",
+        "Godric, Gryffindor",
+        "Igor, Karkaroff",
+        "James, Potter",
+        "Salazar, Slytherin",
+        "Padma, Patil",
+        "Parvati, Patil",
+        "Cedric, Diggory",
+        "Cho, Chang",
+        "Moaning, Myrtle",
+      ];
+
+      //filter method for array
+
+      const afterLife = inventors.filter(
+        (inventor) => inventor.year >= 1860 && inventor.passed >= 1945
+      );
+      console.table(afterLife);
+
+      //map method
+      const fullName = inventors.map(
+        (inventor) => `${inventor.first} ${inventor.last}`
+      );
+      console.log(fullName);
+
+      //Sort method
+
+      //------------long method---------------//
+      // const ordered = inventors.sort(function (a, b) {
+      //   if (a.year > b.year) {
+      //     return 1;
+      //   } else {
+      //     return -1;
+      //   }
+      // });
+
+      //------------Short method-------------//
+
+      const ordered = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
+
+      console.table(ordered);
+
+      //reduce method
+
+      const life = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year);
+      }, 0);
+      console.log(life);
+
+      //sort method inventors by year
+
+      const oldest = inventors.sort((a, b) => {
+        const lastGuy = a.passed - a.year;
+        const nextGuy = b.passed - b.year;
+        return lastGuy > nextGuy ? -1 : 1;
+      });
+      console.table(oldest);
+
+      /*create a list of avenger comics that contains avenger word in its name
+      https://en.wikipedia.org/wiki/Category:Avengers_(comics)
+
+      const category = document.querySelectorAll(".mw-category");
+      const link = category.querySelectorAll("a");
+
+      can do this way small */
+
+      const links = [...document.querySelectorAll(".mw-category a")];
+      const Avenger = links
+        .map((links) => links.textContent)
+        .filter((comicName) => comicName.includes("Avengers"));
+
+      //character Array
+      //sort alphabatecally last name
+
+      const alpha = character.sort((lastOne, nextOne) => {
+        const [aLast, aFirst] = lastOne.split(", ");
+        const [bLast, bFirst] = nextOne.split(", ");
+        return aLast > bLast ? 1 : -1;
+      });
+      console.log(alpha);
+
+      // reduce
+
+      const data = [
+        "car",
+        "truck",
+        "car",
+        "truck",
+        "bike",
+        "walk",
+        "van",
+        "car",
+        "truck",
+        "bike",
+        "bike",
+        "walk",
+        "van",
+        "walk",
+        "van",
+        "car",
+        "truck",
+        "bike",
+        "walk",
+        "van",
+      ];
+
+      const transportation = data.reduce((obj, item) => {
+        if (!obj[item]) {
+          obj[item] = 0;
+        }
+        obj[item]++;
+        return obj;
+      }, {});
+
+      console.log(transportation);
+    </script>
+  </body>
+</html>
